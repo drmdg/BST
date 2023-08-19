@@ -1,6 +1,3 @@
-let a = [1,2,3,4,5,6,7,8,9,10,11];
-
-
 
 function Node(data){
     return {
@@ -210,14 +207,38 @@ function rebalanceTree(root,aux=[]){
     return buildTree(aux,0,aux.length-1);
 }
 
+let a=[];
+for(i=0;i<10;i++){
+    a.push(parseInt(Math.random()*100));
+}
+console.log(a);
 
-let b =buildTree(a,0,a.length-1);
+let b= buildTree(a,0,a.length-1);
 prettyPrint(b);
-insertTree(b,22);
-insertTree(b,224);
-insertTree(b,2244);
-insertTree(b,2133);
-insertTree(b,1255);
+console.log(isBalanced(b));
+console.log(levelOrder(b));
+console.log(inOrder(b));
+console.log(preOrder(b));
+console.log(postOrder(b));
+insertTree(b,222);
+insertTree(b,3333);
+insertTree(b,4444);
+insertTree(b,55555);
 prettyPrint(b);
+console.log(isBalanced(b));
 b=rebalanceTree(b);
 prettyPrint(b);
+console.log(isBalanced(b));
+
+
+
+// let b =buildTree(a,0,a.length-1);
+// prettyPrint(b);
+// insertTree(b,22);
+// insertTree(b,224);
+// insertTree(b,224);
+// insertTree(b,224);
+// insertTree(b,22);
+// prettyPrint(b);
+// b=rebalanceTree(b);
+// prettyPrint(b);
