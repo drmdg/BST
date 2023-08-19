@@ -98,9 +98,126 @@ function deleteNode(root,key){
 
 }
 
+function find(root,key){
+
+    if(root.data==key){
+        return root;
+    }
+    if(key<root.data){
+        root=find(root.left,key);
+        return root;
+    }else{
+        root=find(root.right,key);
+        return root;
+    }
+}
+
+function levelOrder(root){
+    let result=[];
+    let fila=[];
+    let aux;
+
+    fila.push(root);
+    while(fila.length>0){
+        aux=fila.shift();
+        if(aux.left!=null){
+            fila.push(aux.left);
+        }if(aux.right!=null){
+            fila.push(aux.right);
+        }
+        result.push(aux.data);
+    }
+    return result;
+}
+function inOrder(root,aux=[]){
+   
+    if(root!=null){
+        inOrder(root.left,aux);
+        aux.push(root.data);
+        inOrder(root.right,aux);
+    }
+    return aux;
+}
+
+function preOrder(root,aux=[]){
+    
+    if(root!=null){
+        aux.push(root.data);
+        preOrder(root.left,aux);  
+        preOrder(root.right,aux);
+    }
+    return aux;
+}
+
+function postOrder(root,aux=[]){
+    if(root!=null){
+        
+        postOrder(root.left,aux);  
+        postOrder(root.right,aux);
+        aux.push(root.data);
+    }
+    return aux;
+}
+
+function heightTree(root){
+    if(root==null){
+        return 0;
+    }else{
+        let lefth=heightTree(root.left);
+        let righth=heightTree(root.right);
+
+        if(lefth>righth){
+            return lefth+1;
+        }else{
+            return righth+1;
+        }
+    }
+}
+function isBalanced(root){
+    if(root==null){
+        return 0;
+    }else{
+        let lefth=heightTree(root.left);
+        let righth=heightTree(root.right);
+
+        if(lefth>righth){
+            let result= lefth - righth;
+            if(result<2){
+                return true;
+            }else{
+                return false
+            }
+        }else if(righth>lefth){
+            let result=righth-lefth;
+            if (result<2){
+                return true;
+            }else{
+                return false;
+            }
+        }if(lefth==righth){
+            return true;
+        }
+    }
+
+}
+
+function rebalanceTree(root,aux=[]){
+    if(root!=null){
+        rebalanceTree(root.left,aux);
+        aux.push(root.data);
+        rebalanceTree(root.right,aux);
+    }
+    return buildTree(aux,0,aux.length-1);
+}
 
 
 let b =buildTree(a,0,a.length-1);
 prettyPrint(b);
-deleteNode(b,11);
+insertTree(b,22);
+insertTree(b,224);
+insertTree(b,2244);
+insertTree(b,2133);
+insertTree(b,1255);
+prettyPrint(b);
+b=rebalanceTree(b);
 prettyPrint(b);
